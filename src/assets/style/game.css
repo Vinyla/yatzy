@@ -20,7 +20,7 @@
 }
 
 .die-selected {
-  border: 5px solid cyan;
+  opacity: 0.5;
 }
 
 .die-roll {
