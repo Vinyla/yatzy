@@ -39,14 +39,14 @@ const Game = () => {
   };
 
   const toggleFreeze = (id) => {
-    let tmp = [];
+    let lockedDie = [];
     for (const die of dice) {
-      if (die.id === id) {
+      if (die.id === id && !isRolling && rollsLeft > 0) {
         die.isLocked = !die.isLocked;
       }
-      tmp.push(die);
+      lockedDie.push(die);
     }
-    setDice(tmp);
+    setDice(lockedDie);
   };
   
   return (
