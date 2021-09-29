@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import RollButton from './RollButton';
 import Dice from './Dice';
+import ScoringCategories from './ScoringCategories';
 
 const DICE_NUM = 5;
 
@@ -31,6 +32,7 @@ const Game = () => {
     setIsRolling(false);
     setDice(diceArray);
     setRollsLeft(rollsLeft > 0 ? rollsLeft - 1 : 0);
+    //ako selektujem sve kocice - button disabled
   };
 
   const rollAnimation = () => {
@@ -39,14 +41,14 @@ const Game = () => {
   };
 
   const toggleFreeze = (id) => {
-    let lockedDie = [];
+    let lockedDice = [];
     for (const die of dice) {
       if (die.id === id && !isRolling && rollsLeft > 0) {
         die.isLocked = !die.isLocked;
       }
-      lockedDie.push(die);
+      lockedDice.push(die);
     }
-    setDice(lockedDie);
+    setDice(lockedDice);
   };
   
   return (
@@ -63,6 +65,7 @@ const Game = () => {
         rollsLeft={rollsLeft}
         isRolling={isRolling}
       />
+      <ScoringCategories />
     </div>
   );
 };

@@ -2,17 +2,11 @@ import React from 'react';
 
 const Die = (props) => {
   const getImageSrc = (number) => {
-    if (!props.value) {
-      return `/images/1.png`;
-    } else return `/images/${number}.png`;
+    return `/images/${number}.png`;
   };
 
-  let dieClass = 'die' + (props.isRolling && !props.locked ? ' die-roll' : '');
-
-  if (props.locked) {
-    dieClass += ' die-selected ';
-  }
-
+  let dieClass = 'die' + (props.isRolling && !props.locked ? ' die-roll' : '') + (props.locked ? ' die-selected ' : '');
+  
   return (
     <div>
       <img
