@@ -17,13 +17,12 @@ const Category = (props) => {
 
     setIsChecked(true);
 
-    setTotalScore(sumCategoriesSimple(
-      props.dice,
-      scoringValues[event.target.id]
-    ))
+    setTotalScore(
+      sumCategoriesSimple(props.dice, scoringValues[event.target.id])
+    );
   };
 
-  let onClick = 'category' + (isChecked ? ' onClick' : '')
+  let onClick = 'category' + (isChecked ? ' onClick' : '');
   return (
     <div id={props.name} onClick={onCategoryClick} className={onClick}>
       <p>{props.name}</p>

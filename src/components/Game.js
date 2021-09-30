@@ -84,7 +84,6 @@ const Game = () => {
         areAllDiceLocked={areAllDiceLocked}
       />
       <ScoringCategories dice={dice} categories={categories} />
-
       <div className='total'>
         <TotalScore totalScore={getTotalScore()} />
       </div>
