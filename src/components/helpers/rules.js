@@ -19,7 +19,7 @@ const occurences = (dice) => {
  return occurences;
 }
 
-const getNumberOfOccurences(dice, value) => {
+const getNumberOfOccurences = (dice, value) => {
  return dice.filter(dieValue => dieValue === value).length
 }
 
