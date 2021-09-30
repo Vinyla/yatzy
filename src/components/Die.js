@@ -5,8 +5,11 @@ const Die = (props) => {
     return `/images/${number}.png`;
   };
 
-  let dieClass = 'die' + (props.isRolling && !props.locked ? ' die-roll' : '') + (props.locked ? ' die-selected ' : '');
-  
+  let dieClass =
+    'die' +
+    (props.isRolling && !props.locked ? ' die-roll' : '') +
+    (props.locked ? ' die-selected ' : '');
+
   return (
     <div>
       <img

@@ -2,49 +2,90 @@ const sum = (dice) => {
   return dice.reduce((previous, current) => previous + current);
 };
 
-const occurences = (dice) => {
+const frequencies = (dice) => {
   const map = new Map();
-
   for (let die of dice) {
     map.set(die, (map.get(die) || 0) + 1);
   }
-
-  const occurences = [];
-
+  const frequencies = [];
   for (const value of map.values()) {
-    occurences.push(value);
+    frequencies.push(value);
   }
-
-  return occurences;
+  return frequencies;
 };
 
-const getNumberOfOccurences = (dice, value) => {
+const getNumberOfOccurrences = (dice, value) => {
   return dice.filter((dieValue) => dieValue === value).length;
 };
 
 const totalOneNumber = {
   evaluate: (dice, value) => {
-    return value * getNumberOfOccurences(dice, value);
+    return value * getNumberOfOccurrences(dice, value);
   }
 };
 
-const sumDistro = {
-  evaluate: (dice, count) => {
-    return occurences(dice).some((counter) => counter >= count) ? sum(dice) : 0;
+const sumSameKind = {
+  evaluate: (dice, value) => {
+    return frequencies(dice).some((counter) => counter >= value)
+      ? sum(dice)
+      : 0;
   }
 };
 
 const fullHouse = {
   evaluate: (dice, score) => {
-    const die = new Set(dice);
-
-    return (die.size >= 4 && (!die.has(1) || die.has(6))) ||
-      !die.has(1, 2) ||
-      !die.has(5, 6) ||
-      !die.has(1, 6)
-      ? score
-      : 0;
+    if (frequencies(dice).length > 2) {
+      return 0;
+    } else {
+      if (totalOneNumber.evaluate(dice, 4) === 0) {
+        return score;
+      } else {
+        return 0;
+      }
+    }
   }
 };
 
-fullHouse.evaluate([1, 1, 2, 2, 2], 25);
+const straight = {
+  evaluateSmall: (dice, score) => {
+    const dieSet = new Set(dice);
+    if (
+      dieSet.has(2) &&
+      dieSet.has(3) &&
+      dieSet.has(4) &&
+      (dieSet.has(1) || dieSet.has(5))
+    ) {
+      return score;
+    }
+    if (
+      dieSet.has(3) &&
+      dieSet.has(4) &&
+      dieSet.has(5) &&
+      (dieSet.has(2) || dieSet.has(6))
+    ) {
+      return score;
+    }
+    return 0;
+  },
+  evaluateLarge: (dice, score) => {
+    const dieSet = new Set(dice);
+    return dieSet.size === 5 && (!dieSet.has(1) || !dieSet.has(6)) ? score : 0;
+  }
+};
+
+const yathzee = {
+  evaluate: (dice, score) => {
+    return frequencies(dice)[0] === 5 ? score : 0;
+  }
+};
+
+module.exports = {
+  sum,
+  frequencies,
+  getNumberOfOccurrences,
+  totalOneNumber,
+  sumSameKind,
+  fullHouse,
+  straight,
+  yathzee
+};

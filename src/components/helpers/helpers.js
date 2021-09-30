@@ -1,22 +1,21 @@
 const getTotalScore = () => {
-  localStorage.getItem('total-score');
+  return localStorage.getItem('total-score');
 };
 
 const setTotalScore = (score) => {
   localStorage.setItem('total-score', score);
 };
 
-const scoringValues = {
-  Ones: 1,
-  Twos: 2,
-  Threes: 3,
-  Fours: 4,
-  Fives: 5,
-  Sixes: 6
+const getHighScore = () => {
+  return localStorage.getItem('high-score');
 };
 
+const setHighScore = (highScore) => {
+  localStorage.setItem('high-score', highScore);
+};
 module.exports = {
   getTotalScore,
   setTotalScore,
-  scoringValues
+  getHighScore,
+  setHighScore
 };

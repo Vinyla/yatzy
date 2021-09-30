@@ -1,33 +1,30 @@
 import React, { useState } from 'react';
-import {
-  scoringValues,
-  sumCategoriesSimple,
-  setTotalScore
-} from './helpers/helpers';
+import { getTotalScore, setTotalScore } from './helpers/helpers';
 import Rules from './Rules';
 import Score from './Score';
 
 const Category = (props) => {
   const [isChecked, setIsChecked] = useState(false);
-
-  const onCategoryClick = (event) => {
-    event.preventDefault();
-
-    console.log(event.target.id);
-
-    setIsChecked(true);
-
-    setTotalScore(
-      sumCategoriesSimple(props.dice, scoringValues[event.target.id])
-    );
-  };
-
+  const [scored, setScored] = useState(0);
   let onClick = 'category' + (isChecked ? ' onClick' : '');
+
   return (
-    <div id={props.name} onClick={onCategoryClick} className={onClick}>
+    <div
+      id={props.name}
+      onClick={(event) => {
+        if (!isChecked) {
+          setIsChecked(true);
+          props.incrementLockedCategoriesNumber();
+          setScored(props.score);
+          setTotalScore(Number(getTotalScore()) + Number(props.score));
+          props.rollAnimation(true);
+        }
+      }}
+      className={onClick}
+    >
       <p>{props.name}</p>
       {!isChecked && <Rules description={props.description} />}
-      {isChecked && <Score score={props.score} />}
+      {isChecked && <Score score={scored} />}
     </div>
   );
 };

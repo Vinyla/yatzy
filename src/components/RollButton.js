@@ -4,11 +4,7 @@ const RollButton = (props) => {
   return (
     <div>
       <button
-        disabled={
-          props.isRolling === true ||
-          props.rollsLeft === 0 ||
-          props.areAllDiceLocked
-        }
+        disabled={props.isRolling === true || props.rollsLeft === 0}
         onClick={() => props.rollAnimation()}
         className='roll-button'
       >

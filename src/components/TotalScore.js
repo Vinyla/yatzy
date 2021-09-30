@@ -1,10 +1,11 @@
-import React from "react";
+import React from 'react';
+import { getTotalScore } from './helpers/helpers';
 
-const TotalScore = ({ totalScore }) => {
+const TotalScore = () => {
   return (
     <div className='total-score'>
       <h3>Total Score:</h3>
-      <span>{totalScore ? totalScore : 0}</span>
+      <span>{getTotalScore()}</span>
     </div>
   );
 };
