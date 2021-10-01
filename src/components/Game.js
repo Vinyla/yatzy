@@ -4,12 +4,7 @@ import RollButton from './RollButton';
 import Dice from './Dice';
 import ScoringCategories from './ScoringCategories';
 import TotalScore from './TotalScore';
-import {
-  getTotalScore,
-  setTotalScore,
-  setHighScore,
-  getHighScore
-} from './helpers/helpers';
+import { getTotalScore, setTotalScore, setHighScore } from './helpers/helpers';
 
 const DICE_NUM = 5;
 setTotalScore(0);
@@ -18,8 +13,6 @@ const Game = () => {
   const [dice, setDice] = useState([]);
   const [isRolling, setIsRolling] = useState(false);
   const [rollsLeft, setRollsLeft] = useState(3);
-  const [round, setRound] = useState(0);
-  const [playAgain, setPlayAgain] = useState(false);
 
   useEffect(() => {
     rollAnimation();
@@ -76,20 +69,6 @@ const Game = () => {
     setDice(lockedDice);
   };
 
-  const incrementRound = () => {
-    setRound(round + 1);
-  };
-
-  if (round > 12) {
-    if (
-      getHighScore() === null ||
-      Number(getTotalScore()) > Number(getHighScore())
-    ) {
-      setHighScore(Number(getTotalScore()));
-    }
-    setPlayAgain(true);
-  }
-
   return (
     <div className='game'>
       <Header />
@@ -104,14 +83,10 @@ const Game = () => {
         rollsLeft={rollsLeft}
         isRolling={isRolling}
       />
-      <ScoringCategories
-        dice={dice}
-        rollAnimation={rollAnimation}
-        incrementRound={incrementRound}
-      />
+      <ScoringCategories dice={dice} rollAnimation={rollAnimation} />
       <div className='total'>
         <TotalScore />
-      </div>\
+      </div>
     </div>
   );
 };
