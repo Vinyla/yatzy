@@ -1,12 +1,16 @@
-import React from "react";
+import React from 'react';
+import { getHighScore } from './helpers/helpers';
 
-const PlayAgainButton = (props) => {
- return(
-  <div>
-   <h4>Your highscore is: {}</h4>
-   <button>PlayAgain</button>
-  </div>
- )
-}
+const PlayAgainButton = () => {
+  const startNewGame = () => {
+    window.location.reload();
+  };
+  return (
+    <div className='newgame'>
+      <h4>Your highscore is: {getHighScore()}</h4>
+      <button onClick={startNewGame}>PlayAgain</button>
+    </div>
+  );
+};
 
 export default PlayAgainButton;

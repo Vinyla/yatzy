@@ -4,7 +4,7 @@ import RollButton from './RollButton';
 import Dice from './Dice';
 import ScoringCategories from './ScoringCategories';
 import TotalScore from './TotalScore';
-import { getTotalScore, setTotalScore, setHighScore } from './helpers/helpers';
+import { setTotalScore } from './helpers/helpers';
 
 const DICE_NUM = 5;
 setTotalScore(0);
@@ -83,7 +83,10 @@ const Game = () => {
         rollsLeft={rollsLeft}
         isRolling={isRolling}
       />
-      <ScoringCategories dice={dice} rollAnimation={rollAnimation} />
+      <ScoringCategories
+        dice={dice}
+        rollAnimation={rollAnimation}
+      />
       <div className='total'>
         <TotalScore />
       </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Category from './Category';
 import {
   straight,
@@ -22,24 +22,25 @@ const ScoringCategories = (props) => {
     setRound(round + 1);
   };
 
-  if (round > 12) {
-    if (
-      getHighScore() === null ||
-      Number(getTotalScore()) > Number(getHighScore())
-    ) {
-      setHighScore(Number(getTotalScore()));
+  useEffect(() => {
+    if (round > 12) {
+      if (
+        getHighScore() === null ||
+        Number(getTotalScore()) > Number(getHighScore())
+      ) {
+        setHighScore(Number(getTotalScore()));
+      }
+      setPlayAgain(true);
     }
-    setPlayAgain(true);
-  }
+  }, [round, props.setIsRolling]);
 
   return (
     <div className='categories'>
       {playAgain && (
-      <div>
-        <PlayAgainButton />
-      </div>
+        <div>
+          <PlayAgainButton />
+        </div>
       )}
-
       <Category
         name='Ones'
         description='1 point per 1'
