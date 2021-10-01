@@ -1,5 +1,4 @@
 import React from 'react';
-import { getHighScore } from './helpers/helpers';
 
 const PlayAgainButton = () => {
   const startNewGame = () => {
@@ -7,7 +6,7 @@ const PlayAgainButton = () => {
   };
   return (
     <div className='newgame'>
-      <h4>Your highscore is: {getHighScore()}</h4>
+      <h4>End Game!</h4>
       <button onClick={startNewGame}>PlayAgain</button>
     </div>
   );

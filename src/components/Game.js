@@ -4,10 +4,12 @@ import RollButton from './RollButton';
 import Dice from './Dice';
 import ScoringCategories from './ScoringCategories';
 import TotalScore from './TotalScore';
-import { setTotalScore } from './helpers/helpers';
+import { setTotalScore, getHighScore } from './helpers/helpers';
+import HighScore from './HighScore';
 
 const DICE_NUM = 5;
 setTotalScore(0);
+getHighScore(0);
 
 const Game = () => {
   const [dice, setDice] = useState([]);
@@ -86,9 +88,11 @@ const Game = () => {
       <ScoringCategories
         dice={dice}
         rollAnimation={rollAnimation}
+        setRollsLeft={setRollsLeft}
       />
       <div className='total'>
         <TotalScore />
+        {getHighScore() > 0 && <HighScore />}
       </div>
     </div>
   );

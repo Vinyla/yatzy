@@ -31,8 +31,9 @@ const ScoringCategories = (props) => {
         setHighScore(Number(getTotalScore()));
       }
       setPlayAgain(true);
+      props.setRollsLeft(0);
     }
-  }, [round, props.setIsRolling]);
+  }, [round, props.setIsRolling, props.setRollsLeft, props]);
 
   return (
     <div className='categories'>
